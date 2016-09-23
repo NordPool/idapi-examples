@@ -1,0 +1,47 @@
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.pem
+*.p12
+
+## generic java
+*.class
+
+## generic java package Files
+*.jar
+*.war
+*.ear
+
+## eclipse specific files
+.classpath
+.project
+.settings/
+.metadata/
+
+## otherwise common ant and eclipse files
+bin/
+
+## maven specific files
+target/
+dependency-reduced-pom.xml
+
+## unit test log files
+*.log
+
+# JRebel configs
+rebel.xml
+
+.metadata
+
+# IntelliJ Idea files
+*.iml
+.idea/
+
+# NetBeans configuration file
+**/nb-configuration.xml
+**/nbactions.xml
+
+
