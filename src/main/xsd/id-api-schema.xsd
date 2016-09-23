@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+	<xs:element name="nameseq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="result" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="result" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ActivateOrders" type="ActivateOrders"/>
+	<xs:element name="AddOrUpdateUserSettings" type="AddOrUpdateUserSettings"/>
+	<xs:element name="AreaConnection" type="AreaConnectionDto"/>
+	<xs:element name="AreaOrderViewUpdate" type="AreaOrderViewUpdate"/>
+	<xs:element name="AreaTradeViewUpdate" type="AreaTradeViewUpdate"/>
+	<xs:element name="BatchedPrivateOrderResponse" type="BatchedPrivateOrderResponse"/>
+	<xs:element name="BlockOrder" type="BlockOrderDto"/>
+	<xs:element name="BlockTradeReportRow" type="BlockTradeReportRow"/>
+	<xs:element name="CancelOrders" type="CancelOrders"/>
+	<xs:element name="CancelTradeAcceptRequest" type="CancelTradeAcceptRequest"/>
+	<xs:element name="CancelTradeAcceptResponse" type="CancelTradeAcceptResponse"/>
+	<xs:element name="CancelTradeRequest" type="CancelTradeRequest"/>
+	<xs:element name="CancelTradeResult" type="CancelTradeResult"/>
+	<xs:element name="ChangeOrder" type="ChangeOrder"/>
+	<xs:element name="Company" type="CompanyDto"/>
+	<xs:element name="CompanyDto" type="TradeHistoryRow"/>
+	<xs:element name="CompanyUser" type="CompanyUserDto"/>
+	<xs:element name="EnterBlockOrder" type="EnterBlockOrder"/>
+	<xs:element name="EnterFOKOrder" type="EnterFOKOrder"/>
+	<xs:element name="EnterIOCOrder" type="EnterIOCOrder"/>
+	<xs:element name="EnterIcebergOrder" type="EnterIcebergOrder"/>
+	<xs:element name="EnterLimitOrder" type="EnterLimitOrder"/>
+	<xs:element name="EnterMarketMakingLimitOrder" type="EnterMarketMakingLimitOrder"/>
+	<xs:element name="EnterOrder" type="EnterOrder"/>
+	<xs:element name="H2hr" type="h2HReportRow"/>
+	<xs:element name="InactivateOrders" type="InactivateOrders"/>
+	<xs:element name="InitialRefreshRequest" type="InitialRefreshRequest"/>
+	<xs:element name="InitialRefreshResponse" type="InitialRefreshResponse"/>
+	<xs:element name="LocalDate" type="LocalDateDto"/>
+	<xs:element name="LoginRequest" type="LoginRequest"/>
+	<xs:element name="LoginResponse" type="LoginResponse"/>
+	<xs:element name="LogoutRequest" type="LogoutRequest"/>
+	<xs:element name="LogoutResponse" type="LogoutResponse"/>
+	<xs:element name="MarketArea" type="MarketAreaDto"/>
+	<xs:element name="MarketMessage" type="MarketMessageDto"/>
+	<xs:element name="MarketMessageUpdate" type="MarketMessageUpdate"/>
+	<xs:element name="NetPositionRequest" type="NetPositionRequest"/>
+	<xs:element name="NetPositionResponse" type="NetPositionResponse"/>
+	<xs:element name="NetPositionRow" type="NetPositionRow"/>
+	<xs:element name="NetPositions" type="NetPositions"/>
+	<xs:element name="OrderDepth" type="OrderDepth"/>
+	<xs:element name="OrderDepthRow" type="OrderDepthRow"/>
+	<xs:element name="OrderHistoryRequest" type="OrderHistoryRequest"/>
+	<xs:element name="OrderHistoryResponse" type="OrderHistoryResponse"/>
+	<xs:element name="OrderHistoryRow" type="OrderHistoryRow"/>
+	<xs:element name="OrderReport" type="OrderReport"/>
+	<xs:element name="Portfolio" type="PortfolioDto"/>
+	<xs:element name="PrivateBlockOrderRow" type="PrivateBlockOrderRow"/>
+	<xs:element name="PrivateIcebergOrderBookRow" type="PrivateIcebergOrderBookRow"/>
+	<xs:element name="PrivateMarketMakingOrderBookRow" type="PrivateMarketMakingOrderBookRow"/>
+	<xs:element name="PrivateOrderBookRow" type="PrivateOrderBookRow"/>
+	<xs:element name="PrivateOrderResponse" type="PrivateOrderResponse"/>
+	<xs:element name="Product" type="ProductDto"/>
+	<xs:element name="ProductStatusUpdate" type="ProductStatusUpdate"/>
+	<xs:element name="PublicHubToHubUpdate" type="PublicHubToHubUpdate"/>
+	<xs:element name="QueryServiceAreaFlowsList" type="QueryServiceAreaFlowsList"/>
+	<xs:element name="QueryServiceTradeList" type="QueryServiceTradeList"/>
+	<xs:element name="Request" type="Request"/>
+	<xs:element name="Response" type="Response"/>
+	<xs:element name="ResponseFail" type="ResponseFail"/>
+	<xs:element name="SessionHeartBeat" type="SessionHeartBeat"/>
+	<xs:element name="SessionHeartBeatResponse" type="SessionHeartBeatResponse"/>
+	<xs:element name="TradeHistoryRequest" type="TradeHistoryRequest"/>
+	<xs:element name="TradeHistoryResponse" type="TradeHistoryResponse"/>
+	<xs:element name="TradeReportRow" type="TradeReportRow"/>
+	<xs:element name="UserCode" type="UserCodeDto"/>
+	<xs:element name="UserDataRequest" type="UserDataRequest"/>
+	<xs:element name="UserDataResponse" type="UserDataResponse"/>
+	<xs:element name="UserSettings" type="UserSettingsDto"/>
+	<xs:element name="UserSettingsRequest" type="UserSettingsRequest"/>
+	<xs:element name="UserSettingsResponse" type="UserSettingsResponse"/>
+	<xs:element name="result" type="result"/>
+	<xs:complexType name="EnterOrder" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="Price" type="xs:decimal"/>
+					<xs:element name="OrderAction" type="OrderAction"/>
+					<xs:element name="Quantity" type="xs:long"/>
+					<xs:element name="PortfolioId" type="xs:long"/>
+					<xs:element name="MarketAreaCode" type="xs:string"/>
+					<xs:element name="FreeText" type="xs:string" minOccurs="0"/>
+					<xs:element name="Inactive" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="LocalTraderId" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Request" abstract="true">
+		<xs:sequence>
+			<xs:element name="RequestId" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrivateMarketMakingOrderBookRow">
+		<xs:complexContent>
+			<xs:extension base="PrivateOrderBookRow">
+				<xs:sequence>
+					<xs:element name="OriginalQuantity" type="xs:long" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PrivateOrderBookRow">
+		<xs:complexContent>
+			<xs:extension base="OrderDepthRow">
+				<xs:sequence>
+					<xs:element name="UserId" type="xs:long"/>
+					<xs:element name="PortfolioId" type="xs:long"/>
+					<xs:element name="OrderType" type="OrderType"/>
+					<xs:element name="ProductDisplayName" type="xs:string"/>
+					<xs:element name="Validity" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="FreeText" type="xs:string" minOccurs="0"/>
+					<xs:element name="OriginalQty" type="xs:long" minOccurs="0"/>
+					<xs:element name="PreviousOrderNo" type="xs:long" minOccurs="0"/>
+					<xs:element name="Current" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderDepthRow">
+		<xs:sequence>
+			<xs:element name="OrderNo" type="xs:long"/>
+			<xs:element name="UnitPrice" type="xs:decimal"/>
+			<xs:element name="OriginalOrderNo" type="xs:long"/>
+			<xs:element name="VisibleQuantity" type="xs:long" minOccurs="0"/>
+			<xs:element name="ActionCode" type="OrderAction"/>
+			<xs:element name="OrderTime" type="xs:dateTime"/>
+			<xs:element name="MarketAreaCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="OrderStatus" type="OrderStatus"/>
+			<xs:element name="ProductCode" type="xs:string"/>
+			<xs:element name="PriorityTimeStamp" type="xs:dateTime"/>
+			<xs:element name="MarketMaking" type="xs:boolean"/>
+			<xs:element name="LocalTraderId" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrivateOrderResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="PortfolioId" type="xs:long" minOccurs="0"/>
+					<xs:element name="UpdatedOrders" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="UpdatedOrder" type="PrivateOrderBookRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="RemovedOrders" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="RemovedOrder" type="PrivateOrderBookRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Response" abstract="true">
+		<xs:sequence>
+			<xs:element name="RequestId" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productLengthHelper">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="BatchedPrivateOrderResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="ResponseList" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="ResponseList" type="PrivateOrderResponse" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnterBlockOrder">
+		<xs:complexContent>
+			<xs:extension base="EnterOrder">
+				<xs:sequence>
+					<xs:element name="ProductCodes" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="ProductCode" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="OrderValidity" type="xs:dateTime" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LogoutRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="SessionIdentifier" type="xs:string"/>
+					<xs:element name="Username" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnterMarketMakingLimitOrder">
+		<xs:complexContent>
+			<xs:extension base="EnterLimitOrder">
+				<xs:sequence>
+					<xs:element name="OrderNo" type="xs:long" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnterLimitOrder">
+		<xs:complexContent>
+			<xs:extension base="EnterOrder">
+				<xs:sequence>
+					<xs:element name="ProductCode" type="xs:string"/>
+					<xs:element name="OrderValidity" type="xs:dateTime" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PrivateIcebergOrderBookRow">
+		<xs:complexContent>
+			<xs:extension base="PrivateOrderBookRow">
+				<xs:sequence>
+					<xs:element name="ClipPriceChange" type="xs:decimal"/>
+					<xs:element name="ClipQuantity" type="xs:long"/>
+					<xs:element name="RemainingQuantity" type="xs:long" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InactivateOrders">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="OrderNumber" type="xs:long" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QueryServiceAreaFlowsList">
+		<xs:sequence>
+			<xs:element name="FromArea" type="xs:string" minOccurs="0"/>
+			<xs:element name="ToArea" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastEventNo" type="xs:long" minOccurs="0"/>
+			<xs:element name="Unit" type="xs:string" minOccurs="0"/>
+			<xs:element name="Resolution" type="xs:string" minOccurs="0"/>
+			<xs:element name="Flows" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Flows" type="NetPositions" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tradeIdList" type="xs:long" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NetPositions">
+		<xs:sequence>
+			<xs:element name="DeliveryStart" type="xs:string"/>
+			<xs:element name="DeliveryEnd" type="xs:string" minOccurs="0"/>
+			<xs:element name="Qty" type="xs:string" minOccurs="0"/>
+			<xs:element name="Final" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CancelTradeAcceptRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="Accepted" type="xs:boolean"/>
+					<xs:element name="TradeNumber" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LoginRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="UserName" type="xs:string"/>
+					<xs:element name="QueueName" type="xs:string"/>
+					<xs:element name="IsAdminClient" type="xs:boolean"/>
+					<xs:element name="Password" type="xs:string"/>
+					<xs:element name="Platform" type="xs:string" minOccurs="0"/>
+					<xs:element name="ContentType" type="xs:string" minOccurs="0"/>
+					<xs:element name="BatchUpdates" type="xs:boolean" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UserCodeDto">
+		<xs:sequence>
+			<xs:element name="UserId" type="xs:long"/>
+			<xs:element name="UserCode" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CancelTradeResult">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="Success" type="xs:boolean"/>
+					<xs:element name="ErrorCode" type="ResponseErrorCodes" minOccurs="0"/>
+					<xs:element name="TradeNumber" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UserSettingsRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CancelTradeRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="TradeNumber" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompanyUserDto">
+		<xs:sequence>
+			<xs:element name="UserId" type="xs:long"/>
+			<xs:element name="UserCode" type="xs:string"/>
+			<xs:element name="FirstName" type="xs:string"/>
+			<xs:element name="LastName" type="xs:string"/>
+			<xs:element name="Roles" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Role" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="defaultEventInfo">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="BlockOrderDto">
+		<xs:sequence>
+			<xs:element name="OrderNumber" type="xs:long"/>
+			<xs:element name="ProductCodes">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ProductCode" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ProductCodeDisplayName" type="xs:string" minOccurs="0"/>
+			<xs:element name="Price" type="xs:decimal"/>
+			<xs:element name="Quantity" type="xs:long"/>
+			<xs:element name="Action" type="OrderAction"/>
+			<xs:element name="Status" type="OrderStatus"/>
+			<xs:element name="MarketAreaCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="LocalTraderId" type="xs:string" minOccurs="0"/>
+			<xs:element name="PriorityTimeStamp" type="xs:dateTime"/>
+			<xs:element name="OrderTime" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MarketAreaDto">
+		<xs:sequence>
+			<xs:element name="MarketAreaId" type="xs:long" minOccurs="0"/>
+			<xs:element name="MarketAreaCode" type="xs:string"/>
+			<xs:element name="ProductTypes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ProductType" type="ProductType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ProductTimeZone" type="xs:string" minOccurs="0"/>
+			<xs:element name="CurrencyCode" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TradeReportRow">
+		<xs:sequence>
+			<xs:element name="SellOrderId" type="xs:long"/>
+			<xs:element name="BuyOrderId" type="xs:long"/>
+			<xs:element name="ProductCode" type="xs:string"/>
+			<xs:element name="Quantity" type="xs:long"/>
+			<xs:element name="UnitPrice" type="xs:decimal"/>
+			<xs:element name="TradeTime" type="xs:dateTime"/>
+			<xs:element name="TradeNumber" type="xs:long"/>
+			<xs:element name="TradeStatus" type="TradeStatus" minOccurs="0"/>
+			<xs:element name="MarketAreaCodeBuy" type="xs:string" minOccurs="0"/>
+			<xs:element name="MarketAreaCodeSell" type="xs:string" minOccurs="0"/>
+			<xs:element name="DisplayName" type="xs:string" minOccurs="0"/>
+			<xs:element name="AggressorSide" type="OrderAction" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivateOrders">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="OrderNumber" type="xs:long" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ResponseFail">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="ErrorCode" type="ResponseErrorCodes"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="result">
+		<xs:sequence>
+			<xs:element name="PortfolioId" type="xs:long" minOccurs="0"/>
+			<xs:element name="AreaId" type="xs:string" minOccurs="0"/>
+			<xs:element name="Resolution" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastEventNo" type="xs:long" minOccurs="0"/>
+			<xs:element name="Unit" type="xs:string" minOccurs="0"/>
+			<xs:element name="NetPositions" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="NetPositions" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="tradeIdList" type="xs:long" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="queryServiceTradeListRow">
+		<xs:sequence>
+			<xs:element name="agressor" type="xs:boolean"/>
+			<xs:element name="biddingArea" type="xs:string" minOccurs="0"/>
+			<xs:element name="buySell" type="xs:string" minOccurs="0"/>
+			<xs:element name="currency" type="xs:string" minOccurs="0"/>
+			<xs:element name="deliveryEnd" type="xs:string" minOccurs="0"/>
+			<xs:element name="deliveryStart" type="xs:string" minOccurs="0"/>
+			<xs:element name="eventNo" type="xs:long" minOccurs="0"/>
+			<xs:element name="market" type="xs:string" minOccurs="0"/>
+			<xs:element name="portfolioId" type="xs:long" minOccurs="0"/>
+			<xs:element name="productResolution" type="xs:string" minOccurs="0"/>
+			<xs:element name="quantityUnit" type="xs:string" minOccurs="0"/>
+			<xs:element name="refOrderId" type="xs:long" minOccurs="0"/>
+			<xs:element name="refOrderType" type="OrderType" minOccurs="0"/>
+			<xs:element name="relatedProducts" type="productShortInfoType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="status" type="xs:string" minOccurs="0"/>
+			<xs:element name="tenantId" type="xs:string" minOccurs="0"/>
+			<xs:element name="tradeId" type="xs:long" minOccurs="0"/>
+			<xs:element name="tradeTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="unitPrice" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="userId" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="productShortInfoType">
+		<xs:sequence>
+			<xs:element name="deliveryEnd" type="xs:string" minOccurs="0"/>
+			<xs:element name="deliveryStart" type="xs:string" minOccurs="0"/>
+			<xs:element name="productCloseTime" type="xs:string" minOccurs="0"/>
+			<xs:element name="productCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="productDisplayName" type="xs:string" minOccurs="0"/>
+			<xs:element name="qty" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="builder" final="extension restriction">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="TradeHistoryRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="PortfolioId" type="xs:long" minOccurs="0"/>
+					<xs:element name="MarketAreaCodes" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="MarketAreaCode" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="InstrumentStart" type="xs:string" minOccurs="0"/>
+					<xs:element name="InstrumentEnd" type="xs:string" minOccurs="0"/>
+					<xs:element name="FromDate" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="ToDate" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="CancelledTrades" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UserDataResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="CurrentUser" type="CompanyUserDto"/>
+					<xs:element name="CurrentCompany" type="CompanyDto"/>
+					<xs:element name="Portfolios" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="Portfolio" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="CompanyUserCodes" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="CompanyUserCode" type="UserCodeDto" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="HeartbeatFrequency" type="xs:long"/>
+					<xs:element name="SessionTimeout" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompanyDto">
+		<xs:sequence>
+			<xs:element name="CompanyNumber" type="xs:long"/>
+			<xs:element name="CompanyName" type="xs:string"/>
+			<xs:element name="CompanyCode" type="xs:string"/>
+			<xs:element name="MarketAreaCodes">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MarketAreaCode" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PortfolioDto">
+		<xs:sequence>
+			<xs:element name="PortfolioId" type="xs:long"/>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="MarketAreaCodes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MarketAreaCode" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BalancingGroupName" type="xs:string" minOccurs="0"/>
+			<xs:element name="PortfolioCompanyId" type="xs:long"/>
+			<xs:element name="PortfolioCompanyCode" type="xs:string"/>
+			<xs:element name="WriteAccess" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BlockTradeReportRow">
+		<xs:complexContent>
+			<xs:extension base="TradeReportRow">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InitialRefreshRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="lightRefreshRequest" type="xs:boolean" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="elbasApiEventInfo">
+		<xs:complexContent>
+			<xs:extension base="defaultEventInfo">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ChangeOrder">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="OrderNo" type="xs:long"/>
+					<xs:element name="UnitPrice" type="xs:decimal"/>
+					<xs:element name="Quantity" type="xs:long"/>
+					<xs:element name="Validity" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="FreeText" type="xs:string" minOccurs="0"/>
+					<xs:element name="LocalTraderId" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UserSettingsResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="UserSettings" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="UserSetting" type="UserSettingsDto" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UserSettingsDto">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="Category" type="xs:string"/>
+			<xs:element name="Description" type="xs:string" minOccurs="0"/>
+			<xs:element name="Value" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NetPositionResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="NetPositionRows" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="NetPositionRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NetPositionRow">
+		<xs:sequence>
+			<xs:element name="PortfolioName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProductCode" type="xs:string"/>
+			<xs:element name="ProductDisplayName" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProductType" type="xs:string" minOccurs="0"/>
+			<xs:element name="Position" type="xs:long" minOccurs="0"/>
+			<xs:element name="Bought" type="xs:long" minOccurs="0"/>
+			<xs:element name="Sold" type="xs:long" minOccurs="0"/>
+			<xs:element name="From1To2" type="xs:long" minOccurs="0"/>
+			<xs:element name="From2To1" type="xs:long" minOccurs="0"/>
+			<xs:element name="FromMarketAreaCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="ToMarketAreaCode" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddOrUpdateUserSettings">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element ref="UserSettings" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MarketMessageDto">
+		<xs:sequence>
+			<xs:element name="Sender" type="xs:string"/>
+			<xs:element name="Title" type="xs:string"/>
+			<xs:element name="Body" type="xs:string"/>
+			<xs:element name="MessageSentTime" type="xs:dateTime"/>
+			<xs:element name="MarketAreaCode" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MarketMessageUpdate">
+		<xs:complexContent>
+			<xs:extension base="PushUpdate">
+				<xs:sequence>
+					<xs:element name="Message" type="MarketMessageDto"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PushUpdate" abstract="true">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="TradeHistoryRow">
+		<xs:sequence>
+			<xs:element name="DisplayName" type="xs:string"/>
+			<xs:element name="TradeTime" type="xs:dateTime"/>
+			<xs:element name="Quantity" type="xs:long"/>
+			<xs:element name="UnitPrice" type="xs:decimal"/>
+			<xs:element name="TradeNumber" type="xs:string"/>
+			<xs:element name="TradeStatus" type="xs:string"/>
+			<xs:element name="OrderNo" type="xs:string"/>
+			<xs:element name="UserCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="BuySell" type="OrderAction"/>
+			<xs:element name="Area" type="xs:string" minOccurs="0"/>
+			<xs:element name="Portfolio" type="xs:string" minOccurs="0"/>
+			<xs:element name="BlockOrderNo" type="xs:string" minOccurs="0"/>
+			<xs:element name="Label" type="xs:string" minOccurs="0"/>
+			<xs:element name="OrderType" type="OrderType" minOccurs="0"/>
+			<xs:element name="RemainingQty" type="xs:long" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnterIcebergOrder">
+		<xs:complexContent>
+			<xs:extension base="EnterLimitOrder">
+				<xs:sequence>
+					<xs:element name="ClipPriceChange" type="xs:decimal"/>
+					<xs:element name="ClipSize" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="bindings" final="extension restriction">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="PublicHubToHubUpdate">
+		<xs:complexContent>
+			<xs:extension base="PushUpdate">
+				<xs:sequence>
+					<xs:element ref="H2hr" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="h2HReportRow">
+		<xs:sequence>
+			<xs:element name="f" type="xs:string"/>
+			<xs:element name="mf" type="xs:long"/>
+			<xs:element name="xb" type="xs:long"/>
+			<xs:element name="t" type="xs:string"/>
+			<xs:element name="p" type="xs:string"/>
+			<xs:element name="d" type="xs:string"/>
+			<xs:element name="fps" type="ProductStatus"/>
+			<xs:element name="tps" type="ProductStatus"/>
+			<xs:element name="isf" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryServiceTradeList">
+		<xs:sequence>
+			<xs:element name="QueryServiceTradeListRows" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="QueryServiceTradeListRow" type="queryServiceTradeListRow" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductDto">
+		<xs:sequence>
+			<xs:element name="ProductCode" type="xs:string"/>
+			<xs:element name="MarketAreaCode" type="xs:string"/>
+			<xs:element name="ProductStatus" type="ProductStatus"/>
+			<xs:element name="ProductType" type="ProductType"/>
+			<xs:element name="DisplayName" type="xs:string"/>
+			<xs:element name="FromTime" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="DayAheadPrice" type="xs:decimal" minOccurs="0"/>
+			<xs:element name="FirstOfDay" type="xs:boolean"/>
+			<xs:element name="OpenAt" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="CloseAt" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="PeriodFromTimes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PeriodFromTime" type="xs:dateTime" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PeriodToTimes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PeriodToTime" type="xs:dateTime" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrderDepth">
+		<xs:sequence>
+			<xs:element name="OrderDepth" type="OrderDepthRow" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LogoutResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InitialRefreshResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="AreaOrderReports" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="AreaOrderReport" type="OrderReport" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="TradeReports" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="TradeReport" type="TradeReportRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="HubToHubCapacities" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="h2hc" type="h2HReportRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="OwnAndPortfolioOrders" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="OwnAndPortfolioOrder" type="PrivateOrderBookRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Products" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="Product" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="AreaConnections" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="AreaConnection" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="MarketAreas" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="MarketArea" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="MarketMessages" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="MarketMessage" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderReport">
+		<xs:sequence>
+			<xs:element name="AreaCode" type="xs:string"/>
+			<xs:element name="AreaBlockOrdersAdded" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AreaBlockOrderAdded" type="BlockOrderDto" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AreaBlockOrdersDeleted" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AreaBlockOrderDeleted" type="BlockOrderDto" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AreaOrdersDepthAdded" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AreaOrderDepthAdded" type="OrderDepthRow" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AreaOrdersDepthDeleted" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AreaOrderDepthDeleted" type="OrderDepthRow" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AreaConnectionDto">
+		<xs:sequence>
+			<xs:element name="AreaConnId" type="xs:long"/>
+			<xs:element name="Area1" type="MarketAreaDto"/>
+			<xs:element name="Area2" type="MarketAreaDto"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrderHistoryRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="MarketAreaCodes" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="MarketAreaCode" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="PortfolioId" type="xs:long" minOccurs="0"/>
+					<xs:element name="StartTimestamp" type="xs:dateTime"/>
+					<xs:element name="EndTimestamp" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NetPositionRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element ref="LocalDate"/>
+					<xs:element name="PortfolioId" type="xs:long" minOccurs="0"/>
+					<xs:element name="MarketAreaCodes" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="MarketAreaCode" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="CrossBorder" type="xs:boolean"/>
+					<xs:element name="FromMarketArea" type="xs:string" minOccurs="0"/>
+					<xs:element name="ToMarketArea" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LocalDateDto">
+		<xs:sequence>
+			<xs:element name="Year" type="xs:int"/>
+			<xs:element name="Month" type="xs:int"/>
+			<xs:element name="Day" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductStatusUpdate">
+		<xs:complexContent>
+			<xs:extension base="PushUpdate">
+				<xs:sequence>
+					<xs:element name="Products" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="Product" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="comparatorUtils">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="LoginResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="SessionId" type="xs:string"/>
+					<xs:element name="QueueName" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnterFOKOrder">
+		<xs:complexContent>
+			<xs:extension base="EnterLimitOrder">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CancelOrders">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="OrderNumber" type="xs:long" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PrivateBlockOrderRow">
+		<xs:complexContent>
+			<xs:extension base="PrivateOrderBookRow">
+				<xs:sequence>
+					<xs:element name="BlockOrderProduct" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderHistoryRow">
+		<xs:sequence>
+			<xs:element name="DisplayName" type="xs:string"/>
+			<xs:element name="OriginalTimestamp" type="xs:dateTime"/>
+			<xs:element name="LastUpdatedTimestamp" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="OrderNo" type="xs:long"/>
+			<xs:element name="PreviousOrderNo" type="xs:long" minOccurs="0"/>
+			<xs:element name="OriginalOrderNo" type="xs:long" minOccurs="0"/>
+			<xs:element name="ValidityTimestamp" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="Quantity" type="xs:long"/>
+			<xs:element name="UnitPrice" type="xs:decimal"/>
+			<xs:element name="UserCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="MarketArea" type="xs:string" minOccurs="0"/>
+			<xs:element name="Status" type="xs:string"/>
+			<xs:element name="PortfolioName" type="xs:string" minOccurs="0"/>
+			<xs:element name="CompanyName" type="xs:string" minOccurs="0"/>
+			<xs:element name="OriginalOrder" type="xs:boolean"/>
+			<xs:element name="Label" type="xs:string" minOccurs="0"/>
+			<xs:element name="OrderType" type="OrderType"/>
+			<xs:element name="RemainingQty" type="xs:long" minOccurs="0"/>
+			<xs:element name="BuySell" type="OrderAction"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AreaOrderViewUpdate">
+		<xs:complexContent>
+			<xs:extension base="PushUpdate">
+				<xs:sequence>
+					<xs:element name="AreaOrderReports">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="AreaOrderReport" type="OrderReport" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderHistoryResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="OrderHistoryRows" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="OrderHistoryRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CancelTradeAcceptResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="TradeNumber" type="xs:long"/>
+					<xs:element name="RequestTime" type="xs:dateTime"/>
+					<xs:element name="ProductCodeDisplayName" type="xs:string"/>
+					<xs:element name="UnitPrice" type="xs:decimal"/>
+					<xs:element name="Quantity" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UserDataRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SessionHeartBeatResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="Time" type="xs:dateTime" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnterIOCOrder">
+		<xs:complexContent>
+			<xs:extension base="EnterLimitOrder">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="responseIdConstants">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="SessionHeartBeat">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="Time" type="xs:dateTime" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TradeHistoryResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:sequence>
+					<xs:element name="TradeHistoryRows" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="TradeHistoryRow" type="TradeHistoryRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AreaTradeViewUpdate">
+		<xs:complexContent>
+			<xs:extension base="PushUpdate">
+				<xs:sequence>
+					<xs:element name="TradeReports" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="TradeReport" type="TradeReportRow" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="MarketAreaCode" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="OrderAction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Buy"/>
+			<xs:enumeration value="Sell"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IBO"/>
+			<xs:enumeration value="LIMIT"/>
+			<xs:enumeration value="IOC"/>
+			<xs:enumeration value="BLOCK"/>
+			<xs:enumeration value="FOK"/>
+			<xs:enumeration value="MM_LIMIT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="INACTIVATED"/>
+			<xs:enumeration value="MATCHED"/>
+			<xs:enumeration value="VALIDITY_EXPIRED"/>
+			<xs:enumeration value="OPEN_REMAINING"/>
+			<xs:enumeration value="CHANGED"/>
+			<xs:enumeration value="CANCELLED"/>
+			<xs:enumeration value="TRADE_CANCELLED"/>
+			<xs:enumeration value="OPEN"/>
+			<xs:enumeration value="MATURED"/>
+			<xs:enumeration value="FILLED"/>
+			<xs:enumeration value="EXPIRED"/>
+			<xs:enumeration value="ACTIVATED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResponseErrorCodes">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="P01"/>
+			<xs:enumeration value="M01"/>
+			<xs:enumeration value="CV02"/>
+			<xs:enumeration value="E02"/>
+			<xs:enumeration value="O05"/>
+			<xs:enumeration value="O03"/>
+			<xs:enumeration value="T03"/>
+			<xs:enumeration value="O11"/>
+			<xs:enumeration value="MM03"/>
+			<xs:enumeration value="O13"/>
+			<xs:enumeration value="O01"/>
+			<xs:enumeration value="O12"/>
+			<xs:enumeration value="E03"/>
+			<xs:enumeration value="O10"/>
+			<xs:enumeration value="A01"/>
+			<xs:enumeration value="O09"/>
+			<xs:enumeration value="T05"/>
+			<xs:enumeration value="CV01"/>
+			<xs:enumeration value="M03"/>
+			<xs:enumeration value="MM02"/>
+			<xs:enumeration value="E01"/>
+			<xs:enumeration value="E04"/>
+			<xs:enumeration value="O02"/>
+			<xs:enumeration value="O04"/>
+			<xs:enumeration value="T09"/>
+			<xs:enumeration value="P03"/>
+			<xs:enumeration value="T04"/>
+			<xs:enumeration value="O07"/>
+			<xs:enumeration value="C01"/>
+			<xs:enumeration value="O08"/>
+			<xs:enumeration value="PQ02"/>
+			<xs:enumeration value="C02"/>
+			<xs:enumeration value="M02"/>
+			<xs:enumeration value="E05"/>
+			<xs:enumeration value="MM01"/>
+			<xs:enumeration value="T02"/>
+			<xs:enumeration value="T07"/>
+			<xs:enumeration value="O06"/>
+			<xs:enumeration value="A02"/>
+			<xs:enumeration value="P02"/>
+			<xs:enumeration value="A03"/>
+			<xs:enumeration value="T06"/>
+			<xs:enumeration value="T01"/>
+			<xs:enumeration value="T08"/>
+			<xs:enumeration value="PQ01"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UK_DOP"/>
+			<xs:enumeration value="UK_DEP"/>
+			<xs:enumeration value="UK_DP"/>
+			<xs:enumeration value="P60MIN"/>
+			<xs:enumeration value="UK_2H_BLOCK"/>
+			<xs:enumeration value="UK_DB34"/>
+			<xs:enumeration value="UK_DB"/>
+			<xs:enumeration value="UK_DON"/>
+			<xs:enumeration value="P30MIN"/>
+			<xs:enumeration value="P15MIN"/>
+			<xs:enumeration value="UK_4H_BLOCK"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TradeStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="COMPLETED"/>
+			<xs:enumeration value="CANCELLED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CLOSED"/>
+			<xs:enumeration value="NEW"/>
+			<xs:enumeration value="EXPIRED"/>
+			<xs:enumeration value="FROZEN"/>
+			<xs:enumeration value="OPEN"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
