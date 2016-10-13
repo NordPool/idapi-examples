@@ -6,9 +6,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
 import java.time.Clock;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +16,6 @@ import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.http.HttpResponse;
@@ -37,7 +34,6 @@ import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 
 import generated.AreaOrderViewUpdate;
-import generated.EnterFOKOrder;
 import generated.EnterLimitOrder;
 import generated.InitialRefreshRequest;
 import generated.InitialRefreshResponse;
@@ -45,13 +41,16 @@ import generated.LoginRequest;
 import generated.LoginResponse;
 import generated.LogoutRequest;
 import generated.LogoutResponse;
+import generated.MarketArea;
 import generated.OrderAction;
 import generated.Portfolio;
 import generated.PrivateOrderResponse;
+import generated.Product;
 import generated.Request;
 import generated.ResponseFail;
 import generated.SessionHeartBeat;
 import generated.SessionHeartBeatResponse;
+import generated.UserCode;
 import generated.UserDataRequest;
 import generated.UserDataResponse;
 
@@ -59,7 +58,7 @@ import generated.UserDataResponse;
  * Simple program showing basic functionality of an ID API client.
  * e.g. connecting to RabbitMQ, logging in to the intraday server, performing basic tasks.
  * 
- * @author (c) 2016 Nord Pool  
+ * @author (c) 2016 Nord Pool
  * 
  * Notes:
  * 
@@ -125,6 +124,8 @@ public class App {
 	}
 
 	/**
+	 * Creating the connection
+	 * 
 	 * @param host
 	 * @param port
 	 * @param vhost
@@ -164,7 +165,7 @@ public class App {
 	}
 
 	/**
-	 * Set up routine to be run when exiting.
+	 * Run this when exiting
 	 */
 	public void attachShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -180,7 +181,9 @@ public class App {
 		});
 	}
 
-	// Close the channels
+	/**
+	 * Closing the channels
+	 */
 	private void closeChannels() {
 		if (outboundChannel != null && outboundChannel.isOpen()) {
 			try {
@@ -199,7 +202,7 @@ public class App {
 		}
 	}
 
-	// Close connection
+	/* Closing the connection */
 	private void closeConnection() {
 
 		if (connection != null && connection.isOpen()) {
@@ -357,46 +360,7 @@ public class App {
 	 */
 	public static void main(String[] args) {
 		App app = new App();
-		
-		
-//		// TESTING................
-//		// EnterFOKOrder order = new EnterFOKOrder(); // ez jo
-//		EnterLimitOrder order = new EnterLimitOrder(); // @XmlRootElement(name = "EnterLimitOrder") - hianyzik! Miert?
-//		
-//		order.setPortfolioId(522); // (!) check this: use a portfolio you have access to (by portfolio Id)
-//		order.setMarketAreaCode("FI");
-//		order.setProductCode("20160919_20:00"); // (!) check this: it has to be a valid product
-//		order.setOrderAction(OrderAction.BUY);
-//		order.setPrice(new BigDecimal(10.0));
-//		order.setQuantity(100);
-//
-//		order.setFreeText("This is a label, visible in the GUI"); // (!) check this: an optional label - a user-friendly string is the best
-//		order.setLocalTraderId(UUID.randomUUID().toString());     // your UUID (optional) to track your own order
-//		order.setInactive(false);
-//		
-//		order.setRequestId("TestingRequestIdMeri_12345");
-//		
-//
-//		Request req = order; 
-//		byte[] bytes = null;
-//		try {
-//			bytes = Util.serializeEvent(req);
-//			if (bytes != null) {
-//				String sRequest = Util.b64DecodeAndUncompressString(new String(bytes));
-//				System.out.println("\n --> request: \n " + sRequest);
-//			} else {
-//				System.err.println(" Serialization failed for request: " + req);
-//			}
-//		} catch (JAXBException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		if (true)
-//			return;
-		
-		// TESTING ENDS ...................
+	
 
 		System.out.println("Getting SSO token : " + getConfig().getString("sso.username") + " ...");
 		String jsonResponse = app.getSSOTokenResponse(getConfig().getString("sso.username"), getConfig().getString("sso.password"));
@@ -512,8 +476,7 @@ public class App {
 			@Override
 			public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
 
-				// added 8/4/2016 - message type is now available also in the BasicProperties, using original class
-				// names:
+				// added 8/4/2016 - message type is now available also in the BasicProperties, using original class names:
 				if (properties != null) {
 					System.out.printf("\n\nMessage of class %s has been received.", properties.getType());
 				}
@@ -553,10 +516,10 @@ public class App {
 	 */
 	private void handleResponse(String originalRespMessage) {
 
-		// DEBUG ONLY:
+		// --- strictly for DEBUG ONLY! ---
 		// System.out.println("Received a message: '" + originalRespMessage + "'");
 
-		// Be aware that message might be huge, e.g. in case of InitialRefresh.
+		// Be aware that the message here might be huge, e.g. in case of InitialRefresh.
 
 		// try {
 		// String msgStrUnzippedAndDecoded = Util.b64DecodeAndUncompressString(originalRespMessage);
@@ -588,7 +551,7 @@ public class App {
 			// Handling LoginResponse: extract the token to be used in all further requests
 			LoginResponse r = (LoginResponse) resp;
 			setToken(r.getSessionId()); // remember ourt token (AKA session ID)
-
+						
 			System.out.println("Got session id to be used as the token for further requests: " + getToken());
 
 			// Logged in, so let's do the initial/basic subscriptions:
@@ -603,30 +566,30 @@ public class App {
 			InitialRefreshResponse irr = (InitialRefreshResponse) resp;
 
 			System.out.println("Market areas:");
-//			List<MarketArea> areas = irr.getMarketAreas();
-//			if (areas == null) {
-//				System.out.println("none.");
-//			} else {
-//				// for (MarketArea a : areas) {
-//				// System.out.print(" " + a.getMarketAreaCode() + ",");
-//				// }
-//				System.out.println(areas.size() + " pcs");
-//				// System.out.println();
-//			}
-			//System.out.println(irr.getMarketAreas());
+			List<MarketArea> areas = irr.getMarketAreas();
+			if (areas == null) {
+				System.out.println("none.");
+			} else {
+				// for (MarketArea a : areas) {
+				// System.out.print(" " + a.getMarketAreaCode() + ",");
+				// }
+				System.out.println(areas.size() + " pcs");
+				// System.out.println();
+			}
+			System.out.println(irr.getMarketAreas());
 
 			System.out.println();
 			
 			System.out.println("Products:");
-//			List<Product> products = irr.getProducts();
-//			if (products == null) {
-//				System.out.println("none. Too bad... should never occur!");
-//			} else {
-//				// for (Product prod : products) {
-//				// System.out.print(" " + prod.getDisplayName() + "/" + prod.getMarketAreaCode() + ",");
-//				// }
-//				System.out.println(products.size() + " pcs");
-//			}
+			List<Product> products = irr.getProducts();
+			if (products == null) {
+				System.out.println("none. Too bad... should never occur!");
+			} else {
+				 for (Product prod : products) {
+				 System.out.print(" " + prod.getDisplayName() + "/" + prod.getMarketAreaCode() + ",");
+				 }
+				System.out.println(products.size() + " pcs");
+			}
 			System.out.println(irr.getProducts());
 
 			/* 
@@ -644,7 +607,11 @@ public class App {
 			*/
 
 			// (2) Sending an order (check and update the product first!) (immediate)
-			runscenario_sendLimitOrder(); // (!) uncomment this to test 
+			runscenario_sendLimitOrder(); // (!) uncomment this to test
+			
+			// (3) Testing logout:
+			// runscenario_Reconnect();
+			
 
 		} else
 
@@ -661,16 +628,28 @@ public class App {
 			// List of portfolios
 			System.out.println("User's portfolios: ");
 			List<Portfolio> portfolios = udr.getPortfolios();
-
 			if (portfolios == null) {
 				System.out.println("none.");
 			} else {
-				// for (Portfolio pf : portfolios) {
-				// System.out.println(" " + pf.getName());
-				// }
+				for (Portfolio pf : portfolios) {
+					System.out.println(" " + pf.getName());
+				}
 				System.out.println(portfolios.size() + " pcs");
 			}
 
+			System.out.println("User codes:");
+			List<UserCode> usercodes = udr.getCompanyUserCodes();
+
+			if (usercodes == null) {
+				System.out.println("none.");
+			} else {
+				for (UserCode ucode : usercodes) {
+					System.out.println(" UserCode=" + ucode.getUserCode() + ", ID=" + ucode.getUserId());
+				}
+				System.out.println(usercodes.size() + " pcs");
+			}
+
+			
 		} else
 
 		if (resp instanceof ResponseFail) {
@@ -864,6 +843,7 @@ public class App {
 	private void sendLogoutRequest() {
 		System.out.println("Logging out now...");
 		LogoutRequest logoutRequest = new LogoutRequest();
+		logoutRequest.setSessionIdentifier(getToken()); // !!! test this - if set... what happens on logout?
 		logoutRequest.setRequestId(UUID.randomUUID().toString());
 		publishMessage(logoutRequest, outboundChannel, SESSION_MANAGEMENT);
 	}
@@ -894,7 +874,10 @@ public class App {
 			}
 		}, 15000);
 
-		// TEMP: Trying to re-login
+		if (true)
+			return;
+		
+		// if needed: also trying to re-login
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -939,32 +922,36 @@ public class App {
 	 */
 	private void runscenario_sendLimitOrder() {
 		
-		try {
-			Thread.sleep(30000);
-		} catch (InterruptedException e) {
-		}
 		
-		System.out.println("\nSending LimitOrder ...");
+		// Trying to force log out and reconnect after 15 seconds
+				new Timer().schedule(new TimerTask() {
+					@Override
+					public void run() {
 
-		EnterLimitOrder order = new EnterLimitOrder();
+						System.out.println("\nSending LimitOrder ...");
+
+						EnterLimitOrder order = new EnterLimitOrder();
+						
+						order.setPortfolioId(522); // (!) check this: use a portfolio you have access to (by portfolio Id)
+						order.setMarketAreaCode("AMP");
+						order.setProductCode("20161231_16:00"); // (!) check this: it has to be a valid product
+						order.setOrderAction(OrderAction.SELL);
+						order.setPrice(new BigDecimal(55));
+						order.setQuantity(1000); // 
+
+						order.setFreeText("Test order ML (Nord Pool)"); // (!) check this: an optional label - a user-friendly string is the best
+						order.setLocalTraderId(UUID.randomUUID().toString());     // your UUID (optional) to track your own order
+						order.setInactive(false);
+						
+						order.setRequestId(UUID.randomUUID().toString());
+
+						publishMessage(order, outboundChannel, MATCHER);
+
+					}
+				}, 5000);
 		
-		order.setPortfolioId(522); // (!) check this: use a portfolio you have access to (by portfolio Id)
-		order.setMarketAreaCode("FI");
-		order.setProductCode("20160919_19:00"); // (!) check this: it has to be a valid product
-		order.setOrderAction(OrderAction.BUY);
-		order.setPrice(new BigDecimal(10.0));
-		order.setQuantity(1000); // 
-
-		order.setFreeText("This is a label, visible in the GUI"); // (!) check this: an optional label - a user-friendly string is the best
-		order.setLocalTraderId(UUID.randomUUID().toString());     // your UUID (optional) to track your own order
-		order.setInactive(false);
-		
-		order.setRequestId("TestingRequestIdMeri_12345");
-		// order.setRequestId(UUID.randomUUID().toString());
-
-		publishMessage(order, outboundChannel, MATCHER);
 	}
-
+	
 	
 	/**
 	 * Returns true if "json" is the chosen format.
